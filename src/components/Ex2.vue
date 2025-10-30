@@ -18,6 +18,11 @@
                 }
             }
         },
+
+        components: { 
+            blogPost, 
+            } ,
+            
         created() { // created is a hook that executes as soon as Vue instance is created
             axios.get(`${this.baseUrl}/posts`)
             .then(response => {
@@ -29,11 +34,18 @@
                 this.posts = [{ entry: 'There was an error: ' + error.message }]
             })
         }
+
+
     }
 </script>
 
 <template>
    <!-- TODO: make use of the 'blog-post' component to display the blog posts -->
+   <blogPost v-for ="post in posts":subject ="post.subject" 
+      :entry= "post.entry" :mood =" post.mood" :key="post.subject"
+   > 
+   </blogPost>
+
 
 </template>
 
